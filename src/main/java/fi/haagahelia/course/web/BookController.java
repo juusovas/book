@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,12 @@ public class BookController {
 	
 	@Autowired
 	private CategoryRepository crepository; 
+	
+	// Show all books
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
 	
 	
     @RequestMapping(value= {"/", "/booklist"})
@@ -47,19 +54,18 @@ public class BookController {
     } 
     
     
-    
+    // Add new book
     @RequestMapping(value = "/add")
     public String addBook(Model model){
     	 System.out.println("moi");
     	
     	model.addAttribute("book", new Book());
     	model.addAttribute("categories", crepository.findAll());
-    	
-    	
-    	
+    
         return "addbook";
     }     
-    
+    /*
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method= RequestMethod.GET)
     public String editBook(@PathVariable("id") Long bookId, Model model){
     	System.out.println("terve");
@@ -67,9 +73,8 @@ public class BookController {
     	model.addAttribute("book" , repository.findById(bookId));
     	model.addAttribute("categories", crepository.findAll());
     	
-    	
         return "editbook";
-    }   
+    }  */
     
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -81,6 +86,7 @@ public class BookController {
         return "redirect:booklist";
     }    
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
    	 	System.out.println("tere");

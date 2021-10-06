@@ -3,10 +3,13 @@
 <head>
     <title> Booklist </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Add book</h1>
-	<div>
+	<div class="container">
+		<div class="col-md-4">
+	
 		<form th:object="${book}" th:action="@{save}" action="#" method="post">
 		  	
 		  	<label for="author">Author</label>
@@ -33,6 +36,7 @@
 			<input type="submit" value="Save"></input>
 			
 		</form>
+		</div>
 	</div>
 </body>
 </html>
