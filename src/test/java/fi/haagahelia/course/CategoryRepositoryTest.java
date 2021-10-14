@@ -1,4 +1,4 @@
-
+/*
 package fi.haagahelia.course;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,3 +35,6 @@ public class CategoryRepositoryTest {
   
 
 }
+
+
+*/
